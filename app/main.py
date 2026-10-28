@@ -1,16 +1,21 @@
 from app.players.elves.elf import Elf
-from app.players.dwarves.dwarf import Dwarf
 
 
-def calculate_team_total_rating(players: list) -> int:
-    return sum(player.get_rating() for player in players)
+class ElfRanger(Elf):
+    def __init__(
+        self,
+        nickname: str,
+        musical_instrument: str,
+        bow_level: int
+    ) -> None:
+        super().__init__(
+            nickname=nickname,
+            musical_instrument=musical_instrument
+        )
+        self._bow_level = bow_level
 
+    def get_rating(self) -> int:
+        return 3 * self._bow_level
 
-def elves_concert(elves: list[Elf]) -> None:
-    for elf in elves:
-        elf.play_elf_song()
-
-
-def feast_of_the_dwarves(dwarves: list[Dwarf]) -> None:
-    for dwarf in dwarves:
-        dwarf.eat_favourite_dish()
+    def player_info(self) -> str:
+        return f"Elf ranger {self.nickname}. {self.nickname} has bow of the {self._bow_level} level"
